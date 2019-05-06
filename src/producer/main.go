@@ -9,8 +9,8 @@ import (
 )
 
 var (
-	brokerList = kingpin.Flag("brokerList", "List of brokers to connect").Default("localhost:9092").Strings()
-	topic      = kingpin.Flag("topic", "Topic name").Default("firstopic").String()
+	brokerList = kingpin.Flag("brokerList", "List of brokers to connect").Default("127.0.0.1:9092").Strings()
+	topic      = kingpin.Flag("topic", "Topic name").Default("eth.wallet.manager.command").String()
 	maxRetry   = kingpin.Flag("maxRetry", "Retry limit").Default("5").Int()
 )
 
@@ -31,7 +31,7 @@ func main() {
 	}()
 	msg := &sarama.ProducerMessage{
 		Topic: *topic,
-		Value: sarama.StringEncoder("Something Cool"),
+		Value: sarama.StringEncoder("BELDEX"),
 	}
 	partition, offset, err := producer.SendMessage(msg)
 	if err != nil {
